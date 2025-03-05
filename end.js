@@ -17,13 +17,15 @@ saveHighScore = (e) => {
   console.log("clicked the saved button");
   e.preventDefault();
 
-  const score = {
-    score: Math.floor(Math.random() * 100),
+  // Retrieve the score from localStorage
+  const scoreToSave = {
+    score: parseInt(mostRecentScore), // Parse as integer
     name: username.value,
   };
-  highScores.push(score);
+
+  highScores.push(scoreToSave);
   highScores.sort((a, b) => b.score - a.score);
-  highScores.splice(5);
+  highScores.splice(MAX_HIGH_SCORES);
 
   localStorage.setItem("highScores", JSON.stringify(highScores));
   window.location.assign("./index.html");
